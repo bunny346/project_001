@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Driver Route View</title>
+  <style>
+    body{ font-family:Arial; padding:20px; }
+    .route-box{ background:#eee; padding:10px; margin:10px 0; border-radius:5px; }
+  </style>
+</head>
+<body>
+  <h2>Today's Route</h2>
+  <div id="routes"></div>
+
+  <script>
+    async function loadRoute() {
+      const res = await fetch("http://localhost:8000/optimize");
+      const data = await res.json();
+
+      data.route.forEach(r => {
+        const div = document.createElement("div");
+        div.className = "route-box";
+        div.innerHTML = "Visit Bin " + r;
+        document.getElementById("routes").appendChild(div);
+      });
+    }
+
+    loadRoute();
+  </script>
+</body>
+</html>
