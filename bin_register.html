@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register Bin</title>
+  <style>
+    body{ background:#0b1b33; color:white; padding:40px; font-family:Arial; }
+    input,button{ padding:10px; margin:10px; border-radius:6px; }
+    button{ background:#1e90ff; color:white; border:none; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <h2>Bin Registration</h2>
+  <input id="name" placeholder="Bin Name">
+  <input id="lat" placeholder="Latitude">
+  <input id="lon" placeholder="Longitude">
+  <button onclick="addBin()">Add Bin</button>
+
+  <script>
+    async function addBin() {
+      const bin = {
+        name: document.getElementById("name").value,
+        lat: parseFloat(document.getElementById("lat").value),
+        lon: parseFloat(document.getElementById("lon").value)
+      };
+
+      await fetch("http://localhost:8000/add-bin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bin)
+      });
+
+      alert("Bin Added!");
+    }
+  </script>
+</body>
+</html>
